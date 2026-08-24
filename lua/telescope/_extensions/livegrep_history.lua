@@ -80,14 +80,14 @@ function M.live_grep_with_history()
 		prompt_title = "Live Grep History",
 		search = history,
 		attach_mappings = function(_, map)
-			map("i", config.mappings.up_key, function(_prompt_bufnr)
+			map({'i','n'}, config.mappings.up_key, function(_prompt_bufnr)
 				local picker = actions_state.get_current_picker(_prompt_bufnr)
 				if history_index < #history then
 					history_index = history_index + 1
 					picker:set_prompt(history[history_index])
 				end
 			end)
-			map("i", config.mappings.down_key, function(_prompt_bufnr)
+			map({'i','n'}, config.mappings.down_key, function(_prompt_bufnr)
 				local picker = actions_state.get_current_picker(_prompt_bufnr)
 				if history_index > 1 then
 					history_index = history_index - 1
@@ -97,7 +97,7 @@ function M.live_grep_with_history()
 					picker:set_prompt("")
 				end
 			end)
-			map("i", config.mappings.confirm_key, function(_prompt_bufnr)
+			map({'i','n'}, config.mappings.confirm_key, function(_prompt_bufnr)
 				local picker = actions_state.get_current_picker(_prompt_bufnr)
 				local search_word = picker:_get_prompt()
 				add_history(search_word)
